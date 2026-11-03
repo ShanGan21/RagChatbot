@@ -14,13 +14,14 @@ A command-line assistant that answers employee questions about company policies.
 
 ```
 RAGChatbot/
-├── vectordbRag.py      # Pinecone indexing/retrieval, embedding helpers and the chat loop
-├── policies/           # Policy documents (markdown)
+├── policy_rag_chatbot.py  # Pinecone indexing/retrieval, embedding helpers and the chat loop
+├── policies/              # Policy documents (markdown)
 │   ├── leave_policy.md
 │   ├── remote_work_policy.md
 │   ├── expense_policy.md
 │   └── security_policy.md
-├── .env                # API keys (not committed)
+├── .env                   # API keys (not committed)
+├── .gitignore
 └── README.md
 ```
 
@@ -50,19 +51,19 @@ The `policy-qa` index is created automatically on the first run (AWS `us-east-1`
 ## Run
 
 ```bash
-.venv/bin/python vectordbRag.py
+.venv/bin/python policy_rag_chatbot.py
 ```
 
 To use a different policy folder:
 
 ```bash
-.venv/bin/python vectordbRag.py ./my_policies
+.venv/bin/python policy_rag_chatbot.py ./my_policies
 ```
 
 The first run embeds the policies and uploads them to Pinecone. Later runs skip that step. After you edit or add policy files, rebuild the index:
 
 ```bash
-.venv/bin/python vectordbRag.py --reindex
+.venv/bin/python policy_rag_chatbot.py --reindex
 ```
 
 Wait for `Ask a question, or type 'quit' to exit.`, then type a question at the `You:` prompt. Type `quit` to exit.
@@ -83,7 +84,7 @@ Each answer is followed by a `Retrieved:` line listing the sections that were pa
 
 ## Configuration
 
-Constants near the bottom of `vectordbRag.py`:
+Constants near the bottom of `policy_rag_chatbot.py`:
 
 | Name | Default | Purpose |
 | --- | --- | --- |
